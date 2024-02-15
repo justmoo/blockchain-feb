@@ -13,7 +13,6 @@ class Block {
         this.hash = ""
     }
 
-
 }
 
 

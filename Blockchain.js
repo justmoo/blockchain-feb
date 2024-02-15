@@ -9,28 +9,29 @@ class Blockchain {
 
     createGenesisBlock() {
         let Genesis = new Block("Genesis Block", "N/A");
-        // Genesis = this.mine(Genesis);
+        Genesis = this.mine(Genesis);
         console.log("Genesis Block Mined");
         this.chain.push(Genesis);
     }
 
     mine(block) {
-        // get the block
-        // hash the block
-        // check if the hash meets the difficulty
-        // if not, keep hashing
-        // if yes, return the block
+        console.log("Mining Block");
+        while (block.hash.substring(0, 3) !== "000") {
+            block.nonce++;
+            block.hash = sha256.SHA256(block.timestamp + block.data + block.previousHash
+                + block.nonce).toString();
+        }
+        console.log("Block Mined: " + block.hash);
+        return block;
 
     }
-
 
 
     addBlock(data) {
         let previousBlock = this.chain[this.chain.length - 1];
         let newBlock = new Block(data, previousBlock.hash);
-        // newBlock = this.mine(newBlock);
+        newBlock = this.mine(newBlock);
         this.chain.push(newBlock);
-
     }
 
 
